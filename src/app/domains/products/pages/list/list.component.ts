@@ -9,5 +9,8 @@ import { ProductComponent } from '../../components/product/product.component';
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-
+  addToCartEvent(event: string) {
+    console.log('Estoy en el padre');
+    console.log(event);
+  }
 }
