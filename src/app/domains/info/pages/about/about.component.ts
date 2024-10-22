@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { CounterComponent } from '../../../shared/components/counter/counter.component';
+import { CounterComponent } from '@/shared/components/counter/counter.component';
 import { CommonModule } from '@angular/common';
-import { AudioWaveComponent } from '../../components/audio-wave/audio-wave.component';
+import { AudioWaveComponent } from '@/info/components/audio-wave/audio-wave.component';
 
 @Component({
   selector: 'app-about',
