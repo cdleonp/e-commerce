@@ -53,7 +53,7 @@ export class ListComponent {
   }
 
   ngOnInit() {
-    this.productService.getProducts()
+    this.productService.getAll()
     .subscribe({
       next: (products) => {
         const finalProducts = products.map((item) => {

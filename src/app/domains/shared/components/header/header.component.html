@@ -16,23 +16,31 @@
       <ul class="flex space-x-6">
         <li>
           <a
-            href="#"
-            class="block underline hover:underline"
-            aria-current="page"
+            routerLink="/"
+            class="block hover:underline"
+            routerLinkActive="underline"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ariaCurrentWhenActive="page"
             >Tienda</a
           >
         </li>
         <li>
           <a
-            href="#"
+            routerLink="/about"
             class="block hover:underline"
+            routerLinkActive="underline"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ariaCurrentWhenActive="page"
             >Sobre nosotros</a
           >
         </li>
         <li>
           <a
-            href="#"
+            routerLink="/services"
             class="block hover:underline"
+            routerLinkActive="underline"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ariaCurrentWhenActive="page"
             >Servicios</a
           >
         </li>
