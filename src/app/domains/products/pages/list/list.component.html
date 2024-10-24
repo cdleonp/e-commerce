@@ -1,7 +1,26 @@
-<div class="grid grid-cols-3 gap-8 mt-5">
-    @for (product of products(); track $index) {
-        <app-product [product]="product" (addToCart)="addProductToCart(product)"/>
-    } @empty {
-        <p>No hay productos para mostrar</p>
-    }
+<div class="mt-6 md:gap-6 flex flex-wrap xl:gap-8">
+    <aside class="mx-auto px-6 py-4 aside">
+        <h3 class="text-lg font-bold mb-7">Categorías</h3>
+        <ul>
+            <li>
+                <a routerLink="/" [class.active]="!categoryId">Todas</a>
+            </li>
+            <li *ngFor="let category of categories()">
+                <a
+                    routerLink="/"  
+                    [queryParams]="{categoryId: category.id}"
+                    highlight
+                    [class.active]="categoryId === category.id.toString()">              
+                    {{ category.name }}
+                </a>
+            </li>                    
+        </ul>
+    </aside> 
+    <article class="mx-auto article grid gap-6">
+        @for (product of products(); track $index) {
+            <app-product class="h-full" [product]="product" (addToCart)="addProductToCart(product)"/>
+        } @empty {
+            <p>No hay productos para mostrar</p>
+        }
+    </article>
 </div>

@@ -10,7 +10,7 @@ import { AudioWaveComponent } from '@/info/components/audio-wave/audio-wave.comp
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
-export class AboutComponent {
+export default class AboutComponent {
   message = signal('Hola');
   duration = signal(0);
 
