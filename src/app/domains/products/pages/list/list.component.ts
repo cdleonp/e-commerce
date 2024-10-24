@@ -6,14 +6,14 @@ import { CartService } from '@/shared/services/cart.service';
 import { ProductService } from '@/shared/services/product.service';
 import { CategoryService } from '@/shared/services/category.service';
 import { Category } from '@/shared/models/category.model';
-import { CommonModule } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 import { HighlightDirective } from '@/shared/directives/highlight.directive';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ProductComponent, HeaderComponent, CommonModule, RouterLink, HighlightDirective],
+  imports: [ProductComponent, HeaderComponent, RouterLink, HighlightDirective],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
