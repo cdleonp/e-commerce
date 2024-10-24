@@ -1,22 +1,30 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { ProductComponent } from '@/products/components/product/product.component';
 import { Product } from '@/shared/models/product.model'
 import { HeaderComponent } from '@/shared/components/header/header.component';
 import { CartService } from '@/shared/services/cart.service';
 import { ProductService } from '@/shared/services/product.service';
+import { CategoryService } from '@/shared/services/category.service';
+import { Category } from '@/shared/models/category.model';
+
+import { RouterLink } from '@angular/router';
+import { HighlightDirective } from '@/shared/directives/highlight.directive';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ProductComponent, HeaderComponent],
+  imports: [ProductComponent, HeaderComponent, RouterLink, HighlightDirective],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class ListComponent {
+export default class ListComponent {
+  @Input() categoryId?: string;
   products = signal<Product[]>([]);
+  categories = signal<Category[]>([]);
   // cartItems = signal<Product[]>([]);
   private cartService = inject(CartService);
   private productService = inject(ProductService);
+  private categoryService = inject(CategoryService);
 
   /* Sin traer datos de una API */
   // constructor() {
@@ -53,7 +61,16 @@ export class ListComponent {
   }
 
   ngOnInit() {
-    this.productService.getAll()
+    // this.getAllProducts(); Ya no es necesario dado que se ejecuta una vez en el ngOnChanges
+    this.getAllCategories();
+  }
+
+  ngOnChanges() {
+    this.getAllProducts();
+  }
+
+  getAllProducts() {
+    this.productService.getAll(this.categoryId)
     .subscribe({
       next: (products) => {
         const finalProducts = products.map((item) => {
@@ -67,6 +84,18 @@ export class ListComponent {
           }
         });
         this.products.set(finalProducts);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  getAllCategories() {
+    this.categoryService.getAll()
+    .subscribe({
+      next: (categories) => {        
+        this.categories.set(categories);
       },
       error: (error) => {
         console.log(error);
